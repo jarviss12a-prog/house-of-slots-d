@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House of Slots | Berwyn, IL Gaming Parlor</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080808;--card:#111;--mid:#888;--gold:#C9A84C;--gold2:#E8C97A;--border:#1e1e1e;--text:#f0ece4}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;transition:background 0.3s}
+nav.scrolled{background:rgba(8,8,8,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.nav-logo-top{font-size:0.65rem;font-weight:600;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold)}
+.nav-logo-main{font-size:1.4rem;font-weight:900;letter-spacing:0.05em;color:#fff;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#000 !important;padding:0.5rem 1.4rem;font-weight:700 !important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:#fff;transition:all 0.3s}
+@media(max-width:900px){
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,8,0.98);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:1.1rem}
+  .hamburger{display:flex;z-index:300}
+}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=1600&q=80');background-size:cover;background-position:center;filter:brightness(0.35)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,0.5) 40%,rgba(8,8,8,0.1) 100%)}
+.hero-content{position:relative;z-index:1;padding:0 2.5rem 5rem;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;border:1px solid rgba(201,168,76,0.5);color:var(--gold);font-size:0.68rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;padding:0.4rem 1rem;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(3.5rem,9vw,7rem);font-weight:900;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:1.2rem}
+.hero h1 span{display:block;color:var(--gold)}
+.hero-sub{color:rgba(255,255,255,0.65);font-size:1rem;font-weight:300;max-width:500px;margin-bottom:2.5rem;letter-spacing:0.02em}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:1rem 2.5rem;font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;cursor:pointer;border:none}
+.btn-gold{background:var(--gold);color:#000}
+.btn-gold:hover{background:var(--gold2)}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.4);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.06)}
+.hero-scroll{position:absolute;bottom:2rem;right:2.5rem;z-index:1;display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.35);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase}
+.hero-scroll::after{content:'';width:1px;height:50px;background:rgba(255,255,255,0.2)}
+
+/* TICKER */
+.ticker{background:var(--gold);overflow:hidden;padding:0.8rem 0}
+.ticker-inner{display:flex;gap:3rem;animation:ticker 18s linear infinite;white-space:nowrap}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#000;display:flex;align-items:center;gap:1rem}
+.ticker-dot{width:4px;height:4px;background:#000;border-radius:50%}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
+@media(max-width:768px){.about{grid-template-columns:1fr}}
+.about-img{position:relative;min-height:400px;overflow:hidden}
+.about-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8)}
+.about-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.15),transparent)}
+.about-text{background:var(--card);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:768px){.about-text{padding:3rem 2rem}}
+.eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:600;line-height:1.15;margin-bottom:1.2rem;color:#fff}
+.section-title em{color:var(--gold);font-style:italic}
+.body-text{color:var(--mid);font-size:0.88rem;line-height:1.9;margin-bottom:2rem}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem}
+.stat{border-top:1px solid var(--border);padding-top:1rem}
+.stat-num{font-size:2rem;font-weight:900;color:var(--gold);line-height:1}
+.stat-label{font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);margin-top:0.3rem}
+
+/* PHOTO GRID */
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:280px 280px}
+@media(max-width:768px){.photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}}
+.photo-grid-item{overflow:hidden;position:relative}
+.photo-grid-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;filter:brightness(0.75)}
+.photo-grid-item:hover img{transform:scale(1.05);filter:brightness(0.9)}
+.photo-grid-item.tall{grid-row:span 2}
+.photo-grid-label{position:absolute;bottom:1rem;left:1rem;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+
+/* GAMES */
+.games-section{padding:6rem 2.5rem;background:var(--bg)}
+.games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+@media(max-width:768px){.games-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.games-grid{grid-template-columns:1fr}}
+.game-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border)}
+.game-card-img{height:200px;overflow:hidden}
+.game-card-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.6);transition:transform 0.4s}
+.game-card:hover .game-card-img img{transform:scale(1.08)}
+.game-card-body{padding:1.5rem}
+.game-card-body h3{font-size:0.95rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.4rem}
+.game-card-body p{font-size:0.8rem;color:var(--mid)}
+
+/* CTA BAND */
+.cta-band{position:relative;padding:8rem 2.5rem;text-align:center;overflow:hidden}
+.cta-band-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1600&q=80');background-size:cover;background-position:center;filter:brightness(0.2)}
+.cta-band-overlay{position:absolute;inset:0;background:rgba(8,8,8,0.6)}
+.cta-band-content{position:relative;z-index:1}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:600;margin-bottom:1rem;color:#fff}
+.cta-band p{color:rgba(255,255,255,0.65);max-width:480px;margin:0 auto 2.5rem;font-size:0.9rem}
+
+/* HOURS & INFO */
+.info-section{display:grid;grid-template-columns:1fr 1fr;background:var(--card)}
+@media(max-width:768px){.info-section{grid-template-columns:1fr}}
+.info-map{min-height:450px;position:relative}
+.info-map iframe{width:100%;height:100%;border:none;min-height:450px;filter:grayscale(80%) invert(90%) hue-rotate(180deg)}
+.info-panel{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:768px){.info-panel{padding:3rem 2rem}}
+.info-panel h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#fff;margin-bottom:2.5rem}
+.hour-row{display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);font-size:0.85rem}
+.hour-row:last-of-type{border:none}
+.hour-day{color:var(--mid);font-weight:500;letter-spacing:0.05em}
+.hour-time{color:#fff;font-weight:600}
+.hour-time.late{color:var(--gold)}
+.divider{width:40px;height:2px;background:var(--gold);margin:2rem 0}
+.contact-item{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;font-size:0.88rem;color:var(--mid)}
+.contact-item a{color:var(--gold);text-decoration:none;font-weight:600}
+.contact-icon{width:36px;height:36px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.notice{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);padding:1rem 1.2rem;margin-top:2rem;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.7}
+.notice strong{color:var(--gold)}
+
+/* FOOTER */
+footer{background:#040404;border-top:1px solid var(--border);padding:2.5rem;text-align:center}
+.footer-logo{font-size:1.2rem;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:0.8rem}
+.footer-text{font-size:0.75rem;color:#444;line-height:1.8}
+
+/* UTILS */
+.container{max-width:1200px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-top">Berwyn, IL</span>
+    <span class="nav-logo-main">House of Slots</span>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#games">Games</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="tel:7086373957" class="nav-cta">Call Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎰 Gaming Parlor · Berwyn, IL</div>
+    <h1>House<br><span>of Slots</span></h1>
+    <p class="hero-sub">Berwyn's neighborhood gaming destination. Premium video gaming terminals, cold drinks, and great vibes — open late.</p>
+    <div class="hero-actions">
+      <a href="#hours" class="btn btn-gold">Get Directions</a>
+      <a href="#games" class="btn btn-outline">See Games</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Video Slots<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Video Poker<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Cold Drinks<span class="ticker-dot"></span></span>
+    <span class="ticker-item">21+ Only<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Open Late<span class="ticker-dot"></span></span>
+    <span class="ticker-item">IGB Licensed<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Walk-Ins Welcome<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Video Slots<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Video Poker<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Cold Drinks<span class="ticker-dot"></span></span>
+    <span class="ticker-item">21+ Only<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Open Late<span class="ticker-dot"></span></span>
+    <span class="ticker-item">IGB Licensed<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Walk-Ins Welcome<span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img">
+    <img src="https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?w=900&q=80" alt="Gaming parlor interior" loading="lazy">
+    <div class="about-img-overlay"></div>
+  </div>
+  <div class="about-text">
+    <p class="eyebrow">About Us</p>
+    <h2 class="section-title">Berwyn's Go-To<br><em>Gaming Spot</em></h2>
+    <p class="body-text">House of Slots has been a Berwyn staple since 2016 — located right in the heart of the Depot District. We offer the latest video gaming terminals in a clean, welcoming environment with cold drinks and friendly staff who make every visit worth the trip.</p>
+    <p class="body-text">Whether you're a regular or walking in for the first time, you'll feel right at home. 21+ with valid ID.</p>
+    <div class="about-stats">
+      <div class="stat"><div class="stat-num">2016</div><div class="stat-label">Est. in Berwyn</div></div>
+      <div class="stat"><div class="stat-num">21+</div><div class="stat-label">Age Requirement</div></div>
+      <div class="stat"><div class="stat-num">4.6★</div><div class="stat-label">Avg. Rating</div></div>
+      <div class="stat"><div class="stat-num">IGB</div><div class="stat-label">Licensed & Regulated</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GRID -->
+<div class="photo-grid">
+  <div class="photo-grid-item tall">
+    <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=800&q=80" alt="Slot machines" loading="lazy">
+    <span class="photo-grid-label">Gaming Floor</span>
+  </div>
+  <div class="photo-grid-item">
+    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="Bar drinks" loading="lazy">
+    <span class="photo-grid-label">Cold Drinks</span>
+  </div>
+  <div class="photo-grid-item">
+    <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600&q=80" alt="Neon lights" loading="lazy">
+    <span class="photo-grid-label">Atmosphere</span>
+  </div>
+  <div class="photo-grid-item">
+    <img src="https://images.unsplash.com/photo-1609358905581-e5381612486e?w=600&q=80" alt="Poker cards" loading="lazy">
+    <span class="photo-grid-label">Video Poker</span>
+  </div>
+  <div class="photo-grid-item">
+    <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=600&q=80" alt="Entertainment" loading="lazy">
+    <span class="photo-grid-label">Entertainment</span>
+  </div>
+  <div class="photo-grid-item">
+    <img src="https://images.unsplash.com/photo-1573164574397-dd250bc8a598?w=600&q=80" alt="Night life" loading="lazy">
+    <span class="photo-grid-label">Open Late</span>
+  </div>
+</div>
+
+<!-- GAMES -->
+<section class="games-section" id="games">
+  <div class="container">
+    <p class="eyebrow">What We Offer</p>
+    <h2 class="section-title" style="max-width:500px">Premium Gaming<br><em>Terminals</em></h2>
+    <div class="games-grid">
+      <div class="game-card">
+        <div class="game-card-img">
+          <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=600&q=80" alt="Video Slots" loading="lazy">
+        </div>
+        <div class="game-card-body">
+          <h3>🎰 Video Slots</h3>
+          <p>The latest slot machine titles — classic reels, bonus rounds, and everything in between.</p>
+        </div>
+      </div>
+      <div class="game-card">
+        <div class="game-card-img">
+          <img src="https://images.unsplash.com/photo-1609358905581-e5381612486e?w=600&q=80" alt="Video Poker" loading="lazy">
+        </div>
+        <div class="game-card-body">
+          <h3>🃏 Video Poker</h3>
+          <p>Multiple poker game variations to test your skills and luck against the machine.</p>
+        </div>
+      </div>
+      <div class="game-card">
+        <div class="game-card-img">
+          <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=600&q=80" alt="Multi Game" loading="lazy">
+        </div>
+        <div class="game-card-body">
+          <h3>🎲 Multi-Game Terminals</h3>
+          <p>Can't pick one? Switch between slots, poker, keno, and more on a single terminal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="cta-band-overlay"></div>
+  <div class="cta-band-content">
+    <p class="eyebrow" style="color:var(--gold)">Come Play</p>
+    <h2>Feeling Lucky?</h2>
+    <p>Walk in any day of the week. Show your ID, grab a drink, and let the games begin. We're open until 1–3 AM nightly.</p>
+    <a href="tel:7086373957" class="btn btn-gold">📞 (708) 637-3957</a>
+  </div>
+</div>
+
+<!-- HOURS & MAP -->
+<section id="hours" class="info-section">
+  <div class="info-map">
+    <iframe src="https://maps.google.com/maps?q=6823+Stanley+Ave,+Berwyn,+IL+60402&output=embed" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div class="info-panel">
+    <p class="eyebrow">Visit Us</p>
+    <h2>Hours &<br>Location</h2>
+    <div class="hour-row"><span class="hour-day">Monday – Thursday</span><span class="hour-time">11:00 AM – 1:00 AM</span></div>
+    <div class="hour-row"><span class="hour-day">Friday</span><span class="hour-time late">11:00 AM – 3:00 AM</span></div>
+    <div class="hour-row"><span class="hour-day">Saturday</span><span class="hour-time late">11:00 AM – 3:00 AM</span></div>
+    <div class="hour-row"><span class="hour-day">Sunday</span><span class="hour-time">11:00 AM – 1:00 AM</span></div>
+    <div class="divider"></div>
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <span>6823 Stanley Ave, Berwyn, IL 60402</span>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📞</div>
+      <a href="tel:7086373957">(708) 637-3957</a>
+    </div>
+    <div class="notice">
+      <strong>Must be 21+</strong> with valid government-issued ID to enter. House of Slots is a fully licensed establishment regulated by the <strong>Illinois Gaming Board</strong>.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">House of Slots</div>
+  <p class="footer-text">6823 Stanley Ave, Berwyn, IL 60402 · (708) 637-3957<br>
+  Open Mon–Thu & Sun until 1AM · Fri–Sat until 3AM · Must be 21+ · Illinois Gaming Board Licensed<br>
+  © 2025 House of Slots. All rights reserved.</p>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+// Mobile menu
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open');
+});
+</script>
+</body>
+</html>
